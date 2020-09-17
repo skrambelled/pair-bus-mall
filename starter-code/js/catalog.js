@@ -16,7 +16,7 @@ function populateForm() {
     option = document.createElement('option');
     selectElement.append(option);
     option.value = Product.allProducts[i].name;
-    option.textContent = Product.allProducts[i].name; 
+    option.textContent = Product.allProducts[i].name;
   }
 
 }
@@ -26,32 +26,68 @@ function populateForm() {
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
   event.preventDefault();
-  console.log(event.target);
+  // console.log(event.target);
   // Do all the things ...
   addSelectedItemToCart();
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
-  
+
 }
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
-  var form = document.getElementById('catalog');
+  var item = document.getElementById('items').value;
+  var quantity = document.getElementById('quantity').value;
+
+  cart.addItem(item, quantity);
 
 
-  console.log(form);
-  // TODO: suss out the item picked from the select list
-  // TODO: get the quantity
-  // TODO: using those, add one item to the Cart
+  // console.log(item, quantity);
+  // console.log(cart);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+function updateCounter() {
+  var cartCount = document.getElementById('itemCount');
+  var quantity = document.getElementById('quantity').value;
+
+  console.log("cartCount: ", cartCount.textContent);
+
+  if (!cartCount.textContent)
+    cartCount.textContent = quantity;
+  else
+    cartCount.textContent = parseInt(cartCount.textContent) + parseInt(quantity);
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
-  // TODO: Get the item and quantity from the form
+  var item = document.getElementById('items').value;
+  var quantity = document.getElementById('quantity').value;
+
+  var contentsEl = document.getElementById('cartContents');
+
+  contentsEl.innerHTML = null;
+
+  var itemEl = document.createElement('img');
+  contentsEl.append(itemEl);
+
+  var quantityEl = document.createElement('span');
+  contentsEl.append(quantityEl);
+  quantityEl.textContent = "x " + quantity;
+
+  for (let i = 0; i < Product.allProducts.length; i++) {
+    // console.log(Product.allProducts[i])
+    if (item === Product.allProducts[i].name) {
+      // console.log(Product.allProducts[i].filePath);
+      itemEl.src = Product.allProducts[i].filePath;
+      break;
+    }
+  }
+
+  quantityEl.setAttribute("class", "roundEffect");
+
+  console.log(Product.allProducts);
   // TODO: Add a new element to the cartContents div with that information
 }
 

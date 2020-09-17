@@ -23,3 +23,36 @@ footer {
     position: absolute;
     bottom: 0px;
 }
+
+#itemCount {
+  float: right;
+  font-size: 30px;
+  padding-right: 30px;
+}
+
+#cartContents {
+  background: #969696;
+}
+
+#cartContents img {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+  padding: 20px;
+  vertical-align: middle;
+}
+
+#cartContents span {
+  display: inline-block;
+  font-size: 200px;
+  padding: 20px;
+  vertical-align: middle;
+}
+
+.roundEffect {
+  transition-duration: 2s;
+  transition-delay: 1s;
+  background: black;
+  color: white;
+  border-radius: 25%;
+}
