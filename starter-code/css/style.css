@@ -1,1 +1,25 @@
 /* TODO: Make it awesome */
+
+body {
+    width: 100vw;
+    
+}
+
+body > header {
+    height: 100px;
+    width: 100%;
+    background-color: grey;
+
+}
+
+section {
+    margin: auto;
+    background-color: lightgray;
+    border: thin solid black;
+}
+
+footer {
+    background-color: grey;
+    position: absolute;
+    bottom: 0px;
+}
