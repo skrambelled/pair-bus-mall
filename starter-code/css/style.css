@@ -1,7 +1,7 @@
 /* TODO: Make it awesome */
 
 body {
-    width: 100vw;
+    width: 99vw;
     
 }
 
@@ -22,6 +22,7 @@ footer {
     background-color: grey;
     position: absolute;
     bottom: 0px;
+    right: 0px;
 }
 
 #itemCount {
@@ -49,15 +50,61 @@ footer {
   vertical-align: middle;
 }
 
-.roundEffect {
+@keyframes animate1 {
+ from {
+    background-color: black;
+    color: white;
+    border-radius: 5%;
+  } to {
+    background-color: white;
+    color: black;
+    border-radius: 70%;
+  }
+}
+
+#cartContents span {
+  animation-duration: 1s;
+  animation-name: animate1;
+}
+
+/* .roundEffect {
   transition-duration: 2s;
   transition-delay: 1s;
   background: black;
   color: white;
   border-radius: 25%;
-}
+} */
 
 td img {
     height: 100px;
     width: 100px;
+}
+
+#customerForm {
+  background: #414141;
+  color: white;
+  position: sticky;
+  bottom: 0px;
+  height: 100px;
+}
+
+#customerForm input[type=text] {
+  width: 80px;
+  padding: 5px;
+}
+
+#customerForm input:focus {
+  transition-duration: .5s;
+  background: #292929;
+  color: #c4c4c4;
+}
+
+animated {
+  font-size: 100px;
+  margin: auto;
+  text-align: center;
+  margin-left: 300px;
+  animation-duration: 1s;
+  animation-name: animate1;
+  color: purple;
 }

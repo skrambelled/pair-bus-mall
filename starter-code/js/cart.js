@@ -35,7 +35,7 @@ function renderCart() {
 }
 
 // Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() { 
+function clearCart() {
   var tbodyEl = table.getElementsByTagName('tbody')[0];
   tbodyEl.innerHTML = null;
 }
@@ -83,20 +83,94 @@ function showCart() {
 function removeItemFromCart(event) {
   var remove = event.target.nextElementSibling.nextElementSibling.firstElementChild.product;
   for (var i = 0; i < cart.items.length; i++) {
-    if(cart.items[i].product === remove) {
+    if (cart.items[i].product === remove) {
       cart.removeItem(cart.items[i]);
     }
   }
-  
+
   // console.log(event.target.getElementSibling.getElementsSibling.getElementsByTagName('img')[0]);
 
- // Save the cart back to local storage
+  // Save the cart back to local storage
   cart.saveToLocalStorage()
-  
+
   renderCart();
   // TODO: Re-draw the cart table
 }
 
 
+// This form is quite ugly! Needs better verification, but it'll do for now.
+function generateCustomerForm() {
+  var main = document.getElementsByTagName('main')[0];
+
+  var section = document.createElement('section');
+  main.append(section);
+
+  var form = document.createElement('form');
+  section.append(form);
+  form.id = "customerForm";
+
+  var fieldset = document.createElement('fieldset');
+  form.append(fieldset);
+
+  var legend = document.createElement('legend');
+  fieldset.append(legend);
+  legend.textContent = 'Order now!'
+
+  var inputs = {
+    name: "[A-Za-z]+",
+    street: "[A-Za-z]+",
+    city: "[A-Za-z]+",
+    state: "[A-Z]{2}",
+    zip: "[0-9]{5}",
+    phone: "[0-9]{10}",
+    cc: "[0-9]{16}"
+  }
+
+  var keys = Object.keys(inputs);
+
+  var label;
+  var input;
+  for (let i = 0; i < keys.length; i++) {
+    label = document.createElement('label');
+    fieldset.append(label);
+    label.for = "f" + keys[i];
+    label.textContent = keys[i];
+
+    input = document.createElement('input')
+    label.append(input);
+    input.type = "text";
+    input.id = "f" + keys[i];
+    input.name = "f" + keys[i];
+    input.required = true;
+    input.pattern = inputs[keys[i]];
+  }
+
+  // process order button
+  var submit = document.createElement('button');
+  fieldset.append(submit);
+  submit.textContent = "Process order";
+
+
+  // clear and animation upon submit
+  form.addEventListener('submit', makeAnimation);
+
+}
+
+var makeAnimation = function (event) {
+  event.preventDefault();
+  console.log(event.target);
+
+  var form = document.getElementsByTagName('form')[0].innerHTML = null;
+
+  var main = document.getElementsByTagName('main')[0];
+  var section = document.createElement('section');
+  main.append(section);
+  var thing = document.createElement('animated');
+  section.append(thing);
+  thing.textContent = "WINNER!";
+
+}
+
 // This will initialize the page and draw the cart on screen
 renderCart();
+generateCustomerForm();
