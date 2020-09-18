@@ -3,12 +3,28 @@
 
 // Create an event listener so that when the delete link is clicked, the removeItemFromCart method is invoked.
 var table = document.getElementById('cart');
-table.addEventListener('click', removeItemFromCart);
 var cart;
 
 function loadCart() {
   var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  cart = new Cart(cartItems);
+
+  var cartArr = [];
+
+  var product;
+  var quantity;
+
+  console.log(cartItems);
+
+  if (cartItems.items) {
+    for (var i = 0; i < cartItems.items.length; i++) {
+      product = cartItems.items[i]['product'];
+      quantity = cartItems.items[i]['quantity'];
+
+      cartArr.push(new CartItem(product, quantity));
+    }
+  }
+
+  cart = new Cart(cartArr);
 }
 
 // Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
@@ -19,12 +35,12 @@ function renderCart() {
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() { }
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
-  
+
   var tableEl = document.getElementById('cart');
   var tbodyEl = tableEl.getElementsByTagName('tbody')[0];
   console.log(tbodyEl);
@@ -33,9 +49,9 @@ function showCart() {
   var quantityEl;
   var itemEl;
   var itemImageEl;
-// Iterate over the items in the cart
-  for (var i = 0; i < cart.items.length; i++){
-  // Create a TR
+  // Iterate over the items in the cart
+  for (var i = 0; i < cart.items.length; i++) {
+    // Create a TR
     rowEl = document.createElement('tr');
     tbodyEl.append(rowEl);
 
@@ -48,12 +64,17 @@ function showCart() {
     rowEl.append(itemEl);
     itemImageEl = document.createElement('img');
     itemEl.append(itemImageEl);
-    
+
     deleteEl.addEventListener('click', removeItemFromCart);
     deleteEl.textContent = 'x';
-    quantityEl.textContent = (cart.items.items[i].quantity);
-    itemImageEl.src = Product.allProducts[i].filePath; 
-    
+    quantityEl.textContent = (cart.items[i].quantity);
+    for (var j = 0; j < Product.allProducts.length; j++) {
+      if (cart.items[i].product === Product.allProducts[j].name) {
+        itemImageEl.src = Product.allProducts[j].filePath;
+        break;
+      }
+    }
+
   }
 }
 

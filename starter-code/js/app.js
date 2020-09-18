@@ -14,7 +14,7 @@ Cart.prototype.addItem = function (product, quantity) {
     }
 
   }
-  
+
   var item = new CartItem(product, quantity);
   this.items.push(item);
 };

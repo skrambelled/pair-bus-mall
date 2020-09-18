@@ -38,7 +38,7 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   var item = document.getElementById('items').value;
-  var quantity = document.getElementById('quantity').value;
+  var quantity = parseInt(document.getElementById('quantity').value);
 
   cart.addItem(item, quantity);
 
