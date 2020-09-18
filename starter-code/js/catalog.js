@@ -35,7 +35,7 @@ function handleSubmit(event) {
 
 }
 
-// TODO: Add the selected item and quantity to the cart
+// Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   var item = document.getElementById('items').value;
   var quantity = parseInt(document.getElementById('quantity').value);
@@ -47,7 +47,7 @@ function addSelectedItemToCart() {
   // console.log(cart);
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
+// Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
   var cartCount = document.getElementById('itemCount');
   var quantity = document.getElementById('quantity').value;
@@ -60,7 +60,7 @@ function updateCounter() {
     cartCount.textContent = parseInt(cartCount.textContent) + parseInt(quantity);
 }
 
-// TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+// As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   var item = document.getElementById('items').value;
   var quantity = document.getElementById('quantity').value;
