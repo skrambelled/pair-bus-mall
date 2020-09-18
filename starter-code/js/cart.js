@@ -34,15 +34,16 @@ function renderCart() {
   showCart();
 }
 
-// TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() { }
+// Remove all of the rows (tr) in the cart table (tbody)
+function clearCart() { 
+  var tbodyEl = table.getElementsByTagName('tbody')[0];
+  tbodyEl.innerHTML = null;
+}
 
-// TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
+// Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
-
-  var tableEl = document.getElementById('cart');
-  var tbodyEl = tableEl.getElementsByTagName('tbody')[0];
+  var tbodyEl = table.getElementsByTagName('tbody')[0];
   console.log(tbodyEl);
   var rowEl;
   var deleteEl;
@@ -71,6 +72,7 @@ function showCart() {
     for (var j = 0; j < Product.allProducts.length; j++) {
       if (cart.items[i].product === Product.allProducts[j].name) {
         itemImageEl.src = Product.allProducts[j].filePath;
+        itemImageEl.product = cart.items[i].product;
         break;
       }
     }
@@ -79,12 +81,22 @@ function showCart() {
 }
 
 function removeItemFromCart(event) {
-  console.log(event.target);
-  // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
-  // TODO: Save the cart back to local storage
-  // TODO: Re-draw the cart table
+  var remove = event.target.nextElementSibling.nextElementSibling.firstElementChild.product;
+  for (var i = 0; i < cart.items.length; i++) {
+    if(cart.items[i].product === remove) {
+      cart.removeItem(cart.items[i]);
+    }
+  }
+  
+  // console.log(event.target.getElementSibling.getElementsSibling.getElementsByTagName('img')[0]);
 
+ // Save the cart back to local storage
+  cart.saveToLocalStorage()
+  
+  renderCart();
+  // TODO: Re-draw the cart table
 }
+
 
 // This will initialize the page and draw the cart on screen
 renderCart();
