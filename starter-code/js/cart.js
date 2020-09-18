@@ -24,17 +24,41 @@ function clearCart() {}
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
-  // TODO: Find the table body
+  
+  var tableEl = document.getElementById('cart');
+  var tbodyEl = tableEl.getElementsByTagName('tbody')[0];
+  console.log(tbodyEl);
+  var rowEl;
+  var deleteEl;
+  var quantityEl;
+  var itemEl;
+  var itemImageEl;
+// Iterate over the items in the cart
+  for (var i = 0; i < cart.items.length; i++){
+  // Create a TR
+    rowEl = document.createElement('tr');
+    tbodyEl.append(rowEl);
 
-  // TODO: Iterate over the items in the cart
-  // TODO: Create a TR
-  // TODO: Create a TD for the delete link, quantity,  and the item
-  // TODO: Add the TR to the TBODY and each of the TD's to the TR
-
+    // Create a TD for the delete link, quantity,  and the item
+    deleteEl = document.createElement('td');
+    rowEl.append(deleteEl);
+    quantityEl = document.createElement('td');
+    rowEl.append(quantityEl);
+    itemEl = document.createElement('td');
+    rowEl.append(itemEl);
+    itemImageEl = document.createElement('img');
+    itemEl.append(itemImageEl);
+    
+    deleteEl.addEventListener('click', removeItemFromCart);
+    deleteEl.textContent = 'x';
+    quantityEl.textContent = (cart.items.items[i].quantity);
+    itemImageEl.src = Product.allProducts[i].filePath; 
+    
+  }
 }
 
 function removeItemFromCart(event) {
-
+  console.log(event.target);
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
   // TODO: Re-draw the cart table

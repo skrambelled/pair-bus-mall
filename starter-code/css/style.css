@@ -56,3 +56,8 @@ footer {
   color: white;
   border-radius: 25%;
 }
+
+td img {
+    height: 100px;
+    width: 100px;
+}
